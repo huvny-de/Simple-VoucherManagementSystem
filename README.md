@@ -110,12 +110,66 @@ dotnet run --project VoucherManagementSystem.API
 ## 🛠️ Technology Stack
 
 - **Framework**: .NET 8
-- **Architecture**: Clean Architecture + CQRS
+- **Architecture**: Clean Architecture + CQRS + MediatR
 - **Database**: MongoDB
 - **Search**: MongoDB Text Search
 - **API Documentation**: Swagger/OpenAPI
 - **Dependency Injection**: Built-in .NET DI
-- **Validation**: FluentValidation (recommended for production)
+- **Validation**: FluentValidation (Automatic validation pipeline)
+- **Patterns**: Repository Pattern, CQRS, MediatR Pipeline Behaviors
+
+## ✅ FluentValidation
+
+This project uses **FluentValidation** with automatic validation via MediatR pipeline behaviors. All API requests are validated before reaching business logic.
+
+### **Validation Examples:**
+
+#### **User Creation** - Validates:
+- ✅ FirstName: Required, max 50 characters
+- ✅ LastName: Required, max 50 characters
+- ✅ Email: Required, valid email format, max 100 characters
+- ✅ PhoneNumber: Required, international format (e.g., +1234567890)
+- ✅ DateOfBirth: Required, must be in the past, realistic date
+- ✅ Address: Required, max 200 characters
+
+#### **Promotion Creation** - Validates:
+- ✅ Name: Required, max 100 characters
+- ✅ Code: Required, max 50 characters
+- ✅ Description: Max 500 characters
+- ✅ DiscountAmount, DiscountPercentage: Non-negative values
+- ✅ Currency: 3-letter ISO code
+- ✅ StartDate/EndDate: Valid date range
+- ✅ UsageLimit: Must be greater than 0
+
+#### **Voucher Creation** - Validates:
+- ✅ UserId, PromotionId: Required
+- ✅ Code: Required, max 50 characters
+- ✅ Amount fields: Non-negative, valid currency (3-letter ISO)
+
+### **Error Response Format:**
+```json
+{
+  "isSuccess": false,
+  "error": "Validation error messages separated by |",
+  "value": null
+}
+```
+
+**Example Error Response:**
+```json
+{
+  "isSuccess": false,
+  "error": "Email must be a valid email address. | Phone number must be a valid international format. | Date of birth must be in the past.",
+  "value": null
+}
+```
+
+### **Benefits:**
+- ✅ **Automatic Validation** - No need for manual checks
+- ✅ **Early Return** - Invalid requests never reach business logic
+- ✅ **Consistent Errors** - Standardized error format
+- ✅ **Type-Safe** - Compile-time validation rules
+- ✅ **DRY Principle** - Centralized validation logic
 
 ## 📊 API Endpoints
 
@@ -148,6 +202,55 @@ dotnet run --project VoucherManagementSystem.API
 
 ### Search
 - `GET /api/search/users?email={email}` - Search users by email
+
+## 📋 HTTP Status Codes
+
+This API follows REST API standards:
+
+| Status Code | Description | When |
+|-------------|-------------|------|
+| **200 OK** | Success | Resource found, operation successful |
+| **400 Bad Request** | Validation Error | Invalid input data, FluentValidation failed |
+| **404 Not Found** | Resource Not Found | Requested resource doesn't exist |
+| **204 No Content** | Success (No Content) | DELETE operation successful |
+| **500 Internal Server Error** | Server Error | Unexpected server error |
+
+### **Examples:**
+
+**200 OK** - Success Response:
+```json
+GET /api/users/{id}
+Response: 200 OK
+{
+  "id": "67890abcdef1234567890123",
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com"
+}
+```
+
+**404 Not Found** - Resource doesn't exist:
+```json
+GET /api/users/invalid-id
+Response: 404 Not Found
+{
+  "isSuccess": false,
+  "error": "User not found.",
+  "value": null
+}
+```
+
+**400 Bad Request** - Validation failed:
+```json
+POST /api/users
+Body: { "firstName": "" }
+Response: 400 Bad Request
+{
+  "isSuccess": false,
+  "error": "First name is required.",
+  "value": null
+}
+```
 
 ## 🧪 Testing the API
 
