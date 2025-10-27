@@ -2,6 +2,10 @@
 
 A comprehensive voucher management system built with .NET 8, implementing Clean Architecture principles with CQRS pattern and MediatR.
 
+## 📚 Quick Navigation
+
+- **📁 Code Structure**: See [CODE_STRUCTURE.md](CODE_STRUCTURE.md) for detailed file structure.
+
 ## 🏗️ Architecture Overview
 
 ```
