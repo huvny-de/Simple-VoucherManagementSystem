@@ -15,7 +15,7 @@ public class MongoRepository<T> : IRepository<T> where T : class
 
     public virtual async Task<T?> GetByIdAsync(string id)
     {
-        var filter = Builders<T>.Filter.Eq("_id", id);
+        var filter = Builders<T>.Filter.Eq("Id", id);
         return await _collection.Find(filter).FirstOrDefaultAsync();
     }
 
@@ -37,19 +37,19 @@ public class MongoRepository<T> : IRepository<T> where T : class
 
     public virtual async Task UpdateAsync(T entity)
     {
-        var filter = Builders<T>.Filter.Eq("_id", GetIdValue(entity));
+        var filter = Builders<T>.Filter.Eq("Id", GetIdValue(entity));
         await _collection.ReplaceOneAsync(filter, entity);
     }
 
     public virtual async Task DeleteAsync(string id)
     {
-        var filter = Builders<T>.Filter.Eq("_id", id);
+        var filter = Builders<T>.Filter.Eq("Id", id);
         await _collection.DeleteOneAsync(filter);
     }
 
     public virtual async Task<bool> ExistsAsync(string id)
     {
-        var filter = Builders<T>.Filter.Eq("_id", id);
+        var filter = Builders<T>.Filter.Eq("Id", id);
         var count = await _collection.CountDocumentsAsync(filter);
         return count > 0;
     }
