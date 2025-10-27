@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7.0
+    container_name: voucher-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: VoucherManagementSystem
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - voucher-network
+
+  # Voucher Management API
+  voucher-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: voucher-api
+    restart: unless-stopped
+    ports:
+      - "5158:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - DatabaseSettings__ConnectionString=mongodb://mongodb:27017
+      - DatabaseSettings__DatabaseName=VoucherManagementSystem
+    depends_on:
+      - mongodb
+    networks:
+      - voucher-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  voucher-network:
+    driver: bridge

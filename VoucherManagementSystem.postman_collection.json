@@ -1,0 +1,362 @@
+{
+  "info": {
+    "name": "Voucher Management System API",
+    "description": "Complete API collection for testing Voucher Management System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users"]
+            }
+          }
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "{{userId}}"]
+            }
+          }
+        },
+        {
+          "name": "Search Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/search?term={{searchTerm}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "search"],
+              "query": [
+                {
+                  "key": "term",
+                  "value": "{{searchTerm}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users"]
+            }
+          }
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Jane\",\n  \"lastName\": \"Smith\",\n  \"email\": \"jane.smith@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "{{userId}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "{{userId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Promotions",
+      "item": [
+        {
+          "name": "Get All Promotions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/promotions",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "promotions"]
+            }
+          }
+        },
+        {
+          "name": "Get Active Promotions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/promotions/active",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "promotions", "active"]
+            }
+          }
+        },
+        {
+          "name": "Get Promotion by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/promotions/{{promotionId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "promotions", "{{promotionId}}"]
+            }
+          }
+        },
+        {
+          "name": "Get Promotion by Code",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/promotions/code/{{promotionCode}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "promotions", "code", "{{promotionCode}}"]
+            }
+          }
+        },
+        {
+          "name": "Get User Promotions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/promotions/user/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "promotions", "user", "{{userId}}"]
+            }
+          }
+        },
+        {
+          "name": "Create Promotion",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Summer Sale\",\n  \"description\": \"20% off all items\",\n  \"code\": \"SUMMER20\",\n  \"discountPercentage\": 20,\n  \"startDate\": \"2024-01-01T00:00:00Z\",\n  \"endDate\": \"2024-12-31T23:59:59Z\",\n  \"maxUses\": 1000,\n  \"isActive\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/promotions",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "promotions"]
+            }
+          }
+        },
+        {
+          "name": "Update Promotion",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Summer Sale Updated\",\n  \"description\": \"25% off all items\",\n  \"code\": \"SUMMER25\",\n  \"discountPercentage\": 25,\n  \"startDate\": \"2024-01-01T00:00:00Z\",\n  \"endDate\": \"2024-12-31T23:59:59Z\",\n  \"maxUses\": 1500,\n  \"isActive\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/promotions/{{promotionId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "promotions", "{{promotionId}}"]
+            }
+          }
+        },
+        {
+          "name": "Deactivate Promotion",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/promotions/{{promotionId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "promotions", "{{promotionId}}"]
+            }
+          }
+        },
+        {
+          "name": "Add User to Promotion",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/promotions/{{promotionId}}/users/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "promotions", "{{promotionId}}", "users", "{{userId}}"]
+            }
+          }
+        },
+        {
+          "name": "Remove User from Promotion",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/promotions/{{promotionId}}/users/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "promotions", "{{promotionId}}", "users", "{{userId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vouchers",
+      "item": [
+        {
+          "name": "Get Voucher by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/vouchers/{{voucherId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "vouchers", "{{voucherId}}"]
+            }
+          }
+        },
+        {
+          "name": "Get User Vouchers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/vouchers/user/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "vouchers", "user", "{{userId}}"]
+            }
+          }
+        },
+        {
+          "name": "Get Promotion Vouchers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/vouchers/promotion/{{promotionId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "vouchers", "promotion", "{{promotionId}}"]
+            }
+          }
+        },
+        {
+          "name": "Create Voucher",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"promotionId\": \"{{promotionId}}\",\n  \"userId\": \"{{userId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/vouchers",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "vouchers"]
+            }
+          }
+        },
+        {
+          "name": "Use Voucher",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"voucherId\": \"{{voucherId}}\",\n  \"orderId\": \"ORDER-12345\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/vouchers/{{voucherId}}/use",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "vouchers", "{{voucherId}}", "use"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5158"
+    },
+    {
+      "key": "userId",
+      "value": ""
+    },
+    {
+      "key": "promotionId",
+      "value": ""
+    },
+    {
+      "key": "voucherId",
+      "value": ""
+    },
+    {
+      "key": "promotionCode",
+      "value": "SUMMER20"
+    },
+    {
+      "key": "searchTerm",
+      "value": "john"
+    }
+  ]
+}
