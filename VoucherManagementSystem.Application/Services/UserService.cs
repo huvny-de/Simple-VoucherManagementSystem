@@ -1,5 +1,4 @@
 using VoucherManagementSystem.Domain.Entities;
-using VoucherManagementSystem.Domain.Interfaces;
 
 namespace VoucherManagementSystem.Application.Services;
 

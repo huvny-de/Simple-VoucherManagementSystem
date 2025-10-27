@@ -1,6 +1,6 @@
 using VoucherManagementSystem.Domain.Entities;
 
-namespace VoucherManagementSystem.Domain.Interfaces;
+namespace VoucherManagementSystem.Application.Services;
 
 public interface IUserService
 {
