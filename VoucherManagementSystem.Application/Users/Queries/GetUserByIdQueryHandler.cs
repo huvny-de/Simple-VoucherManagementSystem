@@ -24,7 +24,7 @@ public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, Applica
             var user = await _userRepository.GetByIdAsync(request.Id);
             if (user == null)
             {
-                return ApplicationOperationResult<UserDto?>.Success(null);
+                return ApplicationOperationResult<UserDto?>.Failure("User not found.");
             }
 
             var userDto = user.ToDto(_userService);

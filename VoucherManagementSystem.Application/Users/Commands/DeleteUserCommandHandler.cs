@@ -23,8 +23,8 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Appli
                 return ApplicationOperationResult.Failure("User not found");
             }
 
-            user.IsDeleted = true;
-            await _userRepository.UpdateAsync(user);
+            // Use repository's soft delete method
+            await _userRepository.DeleteAsync(request.Id);
 
             return ApplicationOperationResult.Success();
         }

@@ -22,6 +22,11 @@ public abstract class BaseController : ControllerBase
             return Ok(ApplicationOperationResult.Value);
         }
 
+        if (ApplicationOperationResult.Error.Contains("not found", StringComparison.OrdinalIgnoreCase))
+        {
+            return NotFound(ApplicationOperationResult.Error);
+        }
+
         return BadRequest(ApplicationOperationResult.Error);
     }
 
@@ -30,6 +35,11 @@ public abstract class BaseController : ControllerBase
         if (ApplicationOperationResult.IsSuccess)
         {
             return Ok();
+        }
+
+        if (ApplicationOperationResult.Error.Contains("not found", StringComparison.OrdinalIgnoreCase))
+        {
+            return NotFound(ApplicationOperationResult.Error);
         }
 
         return BadRequest(ApplicationOperationResult.Error);
