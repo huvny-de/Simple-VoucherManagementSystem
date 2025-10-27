@@ -6,6 +6,11 @@ A comprehensive voucher management system built with .NET 8, implementing Clean 
 
 - **📁 Code Structure**: See [CODE_STRUCTURE.md](CODE_STRUCTURE.md) for detailed file structure.
 
+### 🧠 About this project
+This project was developed following the Clean Architecture and CQRS principles.  
+AI-assisted tools (such as ChatGPT and GitHub Copilot) were used during development **for brainstorming, syntax generation, and documentation purposes**.  
+All logic and architectural decisions were manually reviewed and implemented by me.
+
 ## 🏗️ Architecture Overview
 
 ```
